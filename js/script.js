@@ -14,7 +14,6 @@ Consigli del giorno:
  * Prendo il div, genero i numeri, inserisco i numeri nel div
  * Creo conto alla rovescia che parte al click sul bottone e stampo il contdown
  */
-
 //Scrivo la funzione per generare i numeri
 function generateNum(){
     const numbers =[]; //creo array vuoto
@@ -26,12 +25,28 @@ function generateNum(){
     }
     return numbers //ritorno l'array pieno
 }
+//Scrivo la fuzione per il risultato
+function check(cip,userNumsBox, numbers){
+    let score = 0;
+    let rightNums = [];
+    cip.innerText="";
+    for (let x of userNumsBox.values()) {//prendo il valore di ogni nodo della lista
+        if (numbers.includes(parseInt(x.value)) && !rightNums.includes(x.value)) { //prendo il valore di ogni input della lista
+            score++; //aumento il punteggio
+            rightNums.push(x.value);//inserisco i numeri nella variabile
+        }  
+    }
+    if(rightNums.length === 0){
+        cip.innerText =`Mi dispiace, non hai ricordato alcun numero!`
+    }else{
+    cip.innerText += `Hai ricordato i seguenti numeri: ${rightNums}. In totale hai ricordato ${score} numeri`;
+    }
+}
 function play(){
     //Reset
     const btn = document.getElementById('userNumbers');//prendo bottone invia
     const userNumsBox = document.querySelectorAll('input[type=number]'); //prendo array di input
-    for (let x of userNumsBox.values()) {
-    x.value = '';}
+    for (let x of userNumsBox.values()) x.value = '';
     let seconds = 30;
     btn.classList.add('d-none');//nascondo i numeri
     let message = document.querySelector('h2');//prendo l'h2
@@ -58,32 +73,10 @@ function play(){
        secondsBox.innerText = seconds; //stampo a schermo i secondi
         }
     }, 1000);
-//Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
-/**
- * Prendo il bottone
- * attacco eventlistener
- * prendo score
- * prendo i numeri inseriti se numbers.includes(numeri inseriti) incremento score e stampa a schermo score e numeri giusti - stesso h3?)
- */
-    //const btn = document.getElementById('userNumbers');//prendo bottone invia
-    //userNumsBox = document.querySelectorAll('input[type=number]'); //prendo array di input
-    
     btn.addEventListener('submit', function(e){
         e.preventDefault();//
-        let score = 0;
-        let rightNums = [];
-        result.innerText="";
-        for (let x of userNumsBox.values()) {//prendo il valore di ogni nodo della lista
-            if (numbers.includes(parseInt(x.value))) { //prendo il valore di ogni input della lista
-                score++; //aumento il punteggio
-                rightNums.push(x.value);//inserisco i numeri nella variabile
-            }  
-        }
-        if(rightNums.length === 0){
-            result.innerText =`Mi dispiace, non hai ricordato alcun numero!`
-        }else{
-        result.innerText += `Hai ricordato i seguenti numeri: ${rightNums}. In totale hai ricordato ${score} numeri`;
-        }
-    })}
+        check(result, userNumsBox, numbers)
+    })
+}
 const start = document.getElementById('start');
 start.addEventListener('click', play);

@@ -27,18 +27,30 @@ function generateNum(){
     return numbers //ritorno l'array pieno
 }
 function play(){
+    //Reset
+    const btn = document.getElementById('userNumbers');//prendo bottone invia
+    const userNumsBox = document.querySelectorAll('input[type=number]'); //prendo array di input
+    for (let x of userNumsBox.values()) {
+    x.value = '';}
+    let seconds = 30;
+    btn.classList.add('d-none');//nascondo i numeri
+    let message = document.querySelector('h2');//prendo l'h2
+    message.innerHTML = `Osserva i numeri qua sotto: hai <span id="seconds">30</span> secondi per memorizzarli`;
+    let result = document.querySelector('h3');
+    result.innerText = "";
     //Numeri casuali
     const pcNumbers = document.getElementById('pcNumbers'); //prendo il div
+    pcNumbers.classList.remove('d-none');
     const numbers = generateNum();//genero i numeri
     pcNumbers.innerText = numbers; //inserisco i numeri nel div
     //Contdown
     const secondsBox = document.getElementById('seconds');//prendo lo span del countdown
-    let seconds = secondsBox.innerText; //selezioni il contenuto
+    seconds = secondsBox.innerText; //selezioni il contenuto
     const countdown = setInterval(() => { //avvio la timing function (ogni secondo)
         seconds--; //decremento i secondi
         if (seconds === 0){ //arrivati a 0 
             clearInterval(countdown); //blocco il contdown
-            let message = document.querySelector('h2');//prendo l'h2
+            //let message = document.querySelector('h2');//prendo l'h2
             message.innerText= `Inserisci i numeri che hai visto`;//cambio il contenuto dell'elemento
             pcNumbers.classList.add('d-none');//nascondo i numeri
             btn.classList.remove('d-none');//rendo visibile il form i numeri
@@ -53,21 +65,21 @@ function play(){
  * prendo score
  * prendo i numeri inseriti se numbers.includes(numeri inseriti) incremento score e stampa a schermo score e numeri giusti - stesso h3?)
  */
-    const btn = document.getElementById('userNumbers');//prendo bottone invia
+    //const btn = document.getElementById('userNumbers');//prendo bottone invia
+    //userNumsBox = document.querySelectorAll('input[type=number]'); //prendo array di input
     
     btn.addEventListener('submit', function(e){
         e.preventDefault();//
-        const userNumsBox = document.querySelectorAll('input[type=number]'); //prendo array di input
         let score = 0;
         let rightNums = [];
-        let result = document.querySelector('h3');
+        result.innerText="";
         for (let x of userNumsBox.values()) {//prendo il valore di ogni nodo della lista
             if (numbers.includes(parseInt(x.value))) { //prendo il valore di ogni input della lista
                 score++; //aumento il punteggio
                 rightNums.push(x.value);//inserisco i numeri nella variabile
             }  
         }
-        if(score === 0){
+        if(rightNums.length === 0){
             result.innerText =`Mi dispiace, non hai ricordato alcun numero!`
         }else{
         result.innerText += `Hai ricordato i seguenti numeri: ${rightNums}. In totale hai ricordato ${score} numeri`;

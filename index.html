@@ -11,18 +11,19 @@
     <title>Simon Says</title>
 </head>
 <body class="bg-warning-subtle">
-    <div class="container mt-5">
-    <h1>Simon says</h1>
-    <h2>Osserva i numeri qua sotto: hai <span id="seconds">30</span> secondi per memorizzarli</h2>
-    <button class="mt-5" id="start">Genera i numeri e inizia il contdown</button>
+    <div class="container text-info mt-5">
+    <h1 class="text-center">Simon says</h1>
+    <h2 class="text-center text-dark">Osserva i numeri qua sotto: hai <span id="seconds">30</span> secondi per memorizzarli</h2>
+    <button class="mt-5 w-100 btn border-3 fs-5 btn-info" id="start">Genera i numeri e inizia il contdown</button>
     <div id="pcNumbers" class="mt-5 fw-semibold display-5"></div>
     <form id="userNumbers" class="d-none mt-5">
-        <input class="me-3 fw-semibold fs-4" type="number" placeholder="Inserisci un numero" required>
-        <input class="me-3 fw-semibold fs-4" type="number" placeholder="Inserisci un numero" required>
-        <input class="me-3 fw-semibold fs-4" type="number" placeholder="Inserisci un numero" required>
-        <input class="me-3 fw-semibold fs-4" type="number" placeholder="Inserisci un numero" required>
-        <input class="me-3 fw-semibold fs-4" type="number" placeholder="Inserisci un numero" required>
-        <button type="submit">Invia</button>
+        <h3 class="mb-5">Inserisci in ogni campo uno dei numeri che ricordi</h3>
+        <input class="mx-3 col-2 btn btn-outline-info fw-semibold" type="number" placeholder="Numero" required>
+        <input class="me-3 col-2 btn btn-outline-info fw-semibold" type="number" placeholder="Numero" required>
+        <input class="me-3 col-2 btn btn-outline-info fw-semibold" type="number" placeholder="Numero" required>
+        <input class="me-3 col-2 btn btn-outline-info fw-semibold" type="number" placeholder="Numero" required>
+        <input class="me-3 col-2 btn btn-outline-info fw-semibold" type="number" placeholder="Numero" required>
+        <button class="btn border-3 w-100 mt-5 fs-5 btn-info" type="submit">Invia</button>
         <h3 class="mt-5"></h3>
     </form>
     </div>
